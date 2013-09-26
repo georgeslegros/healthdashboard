@@ -1,4 +1,8 @@
 ﻿<div id="projects">
     <p>Projects</p>
-    <ul id="project-list"></ul>
+    <ul id="project-list">
+        <% _.each(model.projects, function(item){ %>
+        <li><%=item.name%></li>
+        <%})%>
+    </ul>
 </div>

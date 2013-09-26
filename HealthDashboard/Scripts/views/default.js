@@ -2,7 +2,7 @@
     var $ = require('jquery'),
         _ = require('underscore'),
         Backbone = require('backbone'),
-        Template = _.template(require('text!./default.htm'));;
+        Template = _.template(require('text!./default.htm'));
 
 
     var Project = Backbone.Model.extend({
@@ -55,19 +55,20 @@
     var DefaultView = Backbone.View.extend({
         id: 'defaultView',
         initialize: function () {
+            this.model = Projects;
+
             Projects.on('add', this.addOne, this);
             Projects.on('reset', this.addAll, this);
             Projects.on('all', this.render, this);
             
             Projects.fetch();
         },
-        
-        el: $("#projects"),
 
         render: function () {
-            //this.$el.empty();
-            
-
+            this.$el.empty();
+            if (Projects.length>0) {
+                this.$el.append(Template({ model: { projects: Projects } }));
+            }
             return this.$el;
         },
         
